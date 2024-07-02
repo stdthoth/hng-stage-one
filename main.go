@@ -34,11 +34,13 @@ func GetUserResponse(w http.ResponseWriter, r *http.Request) {
 
 	location := getGeoLocation(ip)
 	weather := getWeather(location)
+	cleanValue := strings.Replace(queryValue, "\"", "", -1)
 
+	
 	result := &UserResponse{
 		Ip:       ip,
 		Location: location,
-		Greeting: fmt.Sprintf("Hello %s!, the temperature is %s degrees Celsius in %s", urlquery, weather, location),
+		Greeting: fmt.Sprintf("Hello %s!, the temperature is %s degrees Celsius in %s", cleanValue, weather, location),
 	}
 
 	jsonResponse, err := json.Marshal(result)
