@@ -17,7 +17,7 @@ type UserResponse struct {
 
 type Locationdetails struct {
 	Location string `json:"city"`
-	Weather  string `json:"temp_c"`
+	Weather  string `json:"temp"`
 }
 
 func GetUserResponse(w http.ResponseWriter, r *http.Request) {
@@ -93,7 +93,7 @@ func getGeoLocation(ip string) string {
 
 func getWeather(city string) string {
 	// Replace with the actual URL and your API key for the weather service
-	resp, err := http.Get(fmt.Sprintf("http://api.weatherapi.com/v1/current.json?key=0281fee424744525b64181746240207&q=%s", city))
+	resp, err := http.Get("http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=fe6e2300fbeb4a7d98bbe5d141fe9685&units=metric")
 	if err != nil {
 		panic(err)
 	}
