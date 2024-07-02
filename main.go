@@ -13,7 +13,6 @@ type UserResponse struct {
 	Ip       string `json:"client_ip"`
 	Location string `json:"location"`
 	Greeting string `json:"greeting"`
-	Weather  string `json:"weather"`
 }
 
 type Locationdetails struct {
@@ -35,12 +34,11 @@ func GetUserResponse(w http.ResponseWriter, r *http.Request) {
 
 	location := getGeoLocation(ip)
 	weather := getWeather(location)
-	greeting := fmt.Sprintf("Hello %s!, the temperature is %s degrees Celsius in %s", urlquery, weather, location)
 
 	result := &UserResponse{
 		Ip:       ip,
 		Location: location,
-		Greeting: greeting,
+		Greeting: fmt.Sprintf("Hello %s!, the temperature is %s degrees Celsius in %s", urlquery, weather, location),
 	}
 
 	jsonResponse, err := json.Marshal(result)
@@ -95,7 +93,7 @@ func getGeoLocation(ip string) string {
 
 func getWeather(city string) string {
 	// Replace with the actual URL and your API key for the weather service
-	resp, err := http.Get(fmt.Sprintf("http://api.weatherapi.com/v1/current.json?key=0281fee424744525b64181746240207&q=%s&aqi=no", city))
+	resp, err := http.Get(fmt.Sprintf("http://api.weatherapi.com/v1/current.json?key=0281fee424744525b64181746240207&q=%s", city))
 	if err != nil {
 		panic(err)
 	}
