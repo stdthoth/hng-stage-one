@@ -34,7 +34,7 @@ func GetUserResponse(w http.ResponseWriter, r *http.Request) {
 
 	location := getGeoLocation(ip)
 	weather := getWeather(location)
-	cleanValue := strings.Replace(queryValue, "\"", "", -1)
+	cleanValue := strings.Replace(urlquery, "\"", "", -1)
 
 	
 	result := &UserResponse{
