@@ -17,7 +17,7 @@ type UserResponse struct {
 
 type Locationdetails struct {
 	Location string `json:"city"`
-	Weather  string `json:"temp"`
+	Weather  float64 `json:"temp"`
 }
 
 func GetUserResponse(w http.ResponseWriter, r *http.Request) {
@@ -40,7 +40,7 @@ func GetUserResponse(w http.ResponseWriter, r *http.Request) {
 	result := &UserResponse{
 		Ip:       ip,
 		Location: location,
-		Greeting: fmt.Sprintf("Hello %s!, the temperature is %s degrees Celsius in %s", cleanValue, weather, location),
+		Greeting: fmt.Sprintf("Hello %s!, the temperature is %.2f degrees Celsius in %s", cleanValue, weather, location),
 	}
 
 	jsonResponse, err := json.Marshal(result)
