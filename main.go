@@ -95,7 +95,7 @@ func getGeoLocation(ip string) string {
 
 func getWeather(city string) float64 {
 	// Replace with the actual URL and your API key for the weather service
-	resp, err := http.Get("http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=fe6e2300fbeb4a7d98bbe5d141fe9685&units=metric")
+	resp, err := http.Get(fmt.Sprintf("http://api.openweathermap.org/data/2.5/weather?q=%s&APPID=feca7f0ab1954aa89c5639ba785f5ea6&units=metric"),city)
 	if err != nil {
 		panic(err)
 	}
